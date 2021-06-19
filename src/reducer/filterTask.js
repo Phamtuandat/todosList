@@ -11,7 +11,7 @@ var myReducer = (state = initialState, action) => {
     case types.FILTER_TASK:
       return {
         name: action.filter.name,
-        status: action.filter.status
+        status: +action.filter.status
       };
     
     default:

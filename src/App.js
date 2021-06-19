@@ -97,7 +97,6 @@ class App extends Component {
 
   render() {
     var { isDisplayForm } = this.props;
-    var { sort } = this.state;
     // if (filter) {
     //   if (filter.name) {
     //     tasks = tasks.filter((task) => {
@@ -151,17 +150,9 @@ class App extends Component {
           >
             <Control
               handleOnClick={this.handleAddClick}
-              handleSearch={this.handleSearch}
-              onSort={this.onSort}
-              sortSettings={sort}
             />
             <div className="row mt-15">
-              <TaksList
-                onUpdateStatus={this.onUpdateStatus}
-                onRemoveTask={this.onRemoveTask}
-                onEditTask={this.onEditTask}
-                onfilter={this.onFilter}
-              />
+              <TaksList/>
             </div>
           </div>
         </div>

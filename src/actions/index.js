@@ -7,6 +7,7 @@ export const listAll = () => {
 }
 export const saveTask = (task) => {
     return {
+        
         type: types.SAVE_TASK,
         task
     }
@@ -42,5 +43,17 @@ export const toggleStatus = (task) => {
     return {
         type : types.TOGGLE_STATUS,
         task
+    }
+}
+export const filterTask = (filter) => {
+    return {
+        type : types.FILTER_TASK,
+        filter
+    }
+}
+export const sortTask = (sort) => {
+    return {
+        type : types.SORT_TASK,
+        sort
     }
 }

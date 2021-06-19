@@ -6,3 +6,5 @@ export const OPEN_FORM = 'OPEN_FORM';
 export const UPDATE_TASK = 'UPDATE_TASK';
 export const DELETE_TASK = 'DELETE_TASK';
 export const TOGGLE_STATUS = 'TOGGLE_STATUS';
+export const FILTER_TASK = 'FILTER_TASK';
+export const SORT_TASK = 'SORT_TASK';

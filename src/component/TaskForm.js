@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import {connect} from "react-redux";
-import * as actions from './../actions/index';
-
+import { connect } from "react-redux";
+import * as actions from "./../actions/index";
 
 class TaskForm extends Component {
   constructor(props) {
@@ -12,7 +11,7 @@ class TaskForm extends Component {
       id: "",
     };
   }
-  
+
   componentDidMount() {
     if (this.props.editTask) {
       var { editTask } = this.props;
@@ -26,23 +25,23 @@ class TaskForm extends Component {
 
   static getDerivedStateFromProps(props, state) {
     if (props.editTask) {
-      if(props.editTask.id !== state.id){
+      if (props.editTask.id !== state.id) {
         return {
           id: props.editTask.id,
           name: props.editTask.name,
-          status: props.editTask.status
-        }
+          status: props.editTask.status,
+        };
       }
-    }else{
-      if(state.id){
+    } else {
+      if (state.id) {
         return {
-          id: '',
-          name: '',
-          status: true
-        }
+          id: "",
+          name: "",
+          status: true,
+        };
       }
     }
-    return null
+    return null;
   }
   handleOnchange = (e) => {
     var target = e.target;
@@ -54,13 +53,14 @@ class TaskForm extends Component {
     this.setState({
       [name]: value,
     });
+    console.log(this.state);
   };
-  
+
   onSubmit = (e) => {
     e.preventDefault();
     this.props.saveTask(this.state);
+    console.log(this.state);
     this.cancelForm();
-
   };
   cancelForm = () => {
     this.setState({
@@ -71,12 +71,14 @@ class TaskForm extends Component {
   };
 
   render() {
-    if(!this.props.isDisplayForm) return '';
+    if (!this.props.isDisplayForm) return "";
     return (
       <div className="panel panel-warning">
         <div className="panel-heading">
           <h3 className="panel-title">
-            {this.props.editTask.id !== '' ? "Cập nhật công việc" : "Thêm công việc"}
+            {this.props.editTask.id !== ""
+              ? "Cập nhật công việc"
+              : "Thêm công việc"}
           </h3>
           <span onClick={this.props.closeForm}>x</span>
         </div>
@@ -105,20 +107,11 @@ class TaskForm extends Component {
             </select>
             <br />
             <div className="text-center">
-              <button
-                type="submit"
-                className="btn btn-warning"
-                onClick={this.cancelForm}
-
-              >
-                {this.props.editTask.id !== '' ? "Lưu lại" : "Thêm"}
+              <button type="submit" className="btn btn-warning">
+                {this.props.editTask.id !== "" ? "Lưu lại" : "Thêm"}
               </button>
               &nbsp;
-              <button
-                type="submit"
-                className="btn btn-danger"
-                onClick={this.cancelForm}
-              >
+              <button type="submit" className="btn btn-danger">
                 Hủy Bỏ
               </button>
             </div>
@@ -130,18 +123,18 @@ class TaskForm extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    isDisplayForm : state.isDisplayForm,
-    editTask: state.editTask
-  }
-}
+    isDisplayForm: state.isDisplayForm,
+    editTask: state.editTask,
+  };
+};
 const mapDispatchToProps = (dispatch) => {
   return {
     saveTask: (task) => {
-      dispatch(actions.saveTask(task))
+      dispatch(actions.saveTask(task));
     },
     closeForm: () => {
-      dispatch(actions.closeForm())
-    }
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps) (TaskForm);
+      dispatch(actions.closeForm());
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(TaskForm);

@@ -10,7 +10,7 @@ var myReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.SORT_TASK:
       return {
-        name: action.sort.name,
+        sortby: action.sort.sortby,
         status: action.sort.status
       };
     

@@ -15,10 +15,7 @@ class App extends Component {
         status: -1,
         keyword: "",
       },
-      sort: {
-        sortby: "name",
-        status: -1,
-      },
+      
     };
     this.handleAddClick = this.handleAddClick.bind(this);
   }

@@ -3,36 +3,34 @@ import "./App.css";
 import TaskForm from "./component/TaskForm";
 import Control from "./component/Control";
 import TaksList from "./component/TaksList";
-import {connect} from "react-redux"
-import * as actions from "./actions/index"
+import { connect } from "react-redux";
+import * as actions from "./actions/index";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      taskEditing: null,
       filter: {
         name: "",
         status: -1,
-        keyword:''
+        keyword: "",
       },
       sort: {
-        sortby: 'name',
-        status: -1
-
-      }
+        sortby: "name",
+        status: -1,
+      },
     };
     this.handleAddClick = this.handleAddClick.bind(this);
   }
-  
+
   openEditTask = () => {
-    this.props.openForm()
-  }
+    this.props.openForm();
+  };
 
   handleAddClick() {
-    this.props.toggleForm()
+    this.props.toggleForm();
   }
-  
+
   onUpdateStatus = (id) => {
     var { tasks } = this.state;
     var index = this.searchIndex(id);
@@ -82,24 +80,24 @@ class App extends Component {
   };
   handleSearch = (keyword) => {
     this.setState({
-      filter:{
-        keyword: keyword.toLowerCase()
-      }
-    })
-    console.log(keyword)
-  }
+      filter: {
+        keyword: keyword.toLowerCase(),
+      },
+    });
+    console.log(keyword);
+  };
   onSort = (sortby, status) => {
     this.setState({
-      sort:{
+      sort: {
         sortby: sortby,
-        status: status
-      }
-    })
-  }
-  
+        status: status,
+      },
+    });
+  };
+
   render() {
-    var {isDisplayForm} = this.props;
-    var {   sort} = this.state;
+    var { isDisplayForm } = this.props;
+    var { sort } = this.state;
     // if (filter) {
     //   if (filter.name) {
     //     tasks = tasks.filter((task) => {
@@ -112,7 +110,7 @@ class App extends Component {
     //     }else {
     //       return task.status === (filter.status === 1 ? true : false)
     //     }
-        
+
     //   });
     //   if (filter.keyword) {
     //     tasks = tasks.filter((task) => {
@@ -134,9 +132,6 @@ class App extends Component {
     //   })
     // }
 
-    
-
-
     return (
       <div className="container">
         <div className="text-center">
@@ -145,7 +140,7 @@ class App extends Component {
         </div>
         <div className="row">
           <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-          <TaskForm/>
+            <TaskForm />
           </div>
           <div
             className={
@@ -154,7 +149,12 @@ class App extends Component {
                 : "col-xs-12 col-sm-12 col-md-12 col-lg-12"
             }
           >
-            <Control handleOnClick={this.handleAddClick} handleSearch={this.handleSearch} onSort={this.onSort} sortSettings={sort}/>
+            <Control
+              handleOnClick={this.handleAddClick}
+              handleSearch={this.handleSearch}
+              onSort={this.onSort}
+              sortSettings={sort}
+            />
             <div className="row mt-15">
               <TaksList
                 onUpdateStatus={this.onUpdateStatus}
@@ -169,16 +169,19 @@ class App extends Component {
     );
   }
 }
-const mapStateToProps = state =>{
+const mapStateToProps = (state) => {
   return {
-    isDisplayForm: state.isDisplayForm
-  }
-}
-const mapDispatchToProps = (dispatch, props) =>{
+    isDisplayForm: state.isDisplayForm,
+  };
+};
+const mapDispatchToProps = (dispatch, props) => {
   return {
-    toggleForm :()=> {
-      dispatch(actions.togglesForm())
+    toggleForm: () => {
+      dispatch(actions.togglesForm());
+    },
+    openForm: () => {
+      dispatch(actions.openForm());
     }
-  }
-}
-export default connect( mapStateToProps, mapDispatchToProps)(App);
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -76,9 +76,9 @@ class TaskForm extends Component {
       <div className="panel panel-warning">
         <div className="panel-heading">
           <h3 className="panel-title">
-            {this.props.editTask ? "Cập nhật công việc" : "Thêm công việc"}
+            {this.props.editTask.id !== '' ? "Cập nhật công việc" : "Thêm công việc"}
           </h3>
-          <span onClick={this.closeForm}>x</span>
+          <span onClick={this.props.closeForm}>x</span>
         </div>
         <div className="panel-body">
           <form onSubmit={this.onSubmit} name="taskForm">
@@ -108,9 +108,10 @@ class TaskForm extends Component {
               <button
                 type="submit"
                 className="btn btn-warning"
-                onClick={this.allowSubmit}
+                onClick={this.cancelForm}
+
               >
-                {this.props.editTask !== "" ? "Lưu lại" : "Thêm"}
+                {this.props.editTask.id !== '' ? "Lưu lại" : "Thêm"}
               </button>
               &nbsp;
               <button
@@ -137,6 +138,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     saveTask: (task) => {
       dispatch(actions.saveTask(task))
+    },
+    closeForm: () => {
+      dispatch(actions.closeForm())
     }
   }
 }
